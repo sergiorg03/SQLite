@@ -7,22 +7,29 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static SQLiteDatabase db;
-    private static CreacionBBDD dbHelper;
-    InsercionDatosBBDD insertarDatos;
+    public static SQLiteDatabase db;
+    public static DBManager DDBBS;
     public String comando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbHelper = new CreacionBBDD(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
-        db = dbHelper.getWritableDatabase();
-        insertarDatos = new InsercionDatosBBDD(db);
+        DDBBS = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+        db = DDBBS.getWritableDatabase();
     }
 
     public void insertarDatosBoton(View view){
-        insertarDatos.insert(comando);
+        DDBBS.insert(comando);
     }
+
+    public void modificarDatosBoton(View view){
+        DDBBS.modificarDatos(comando);
+    }
+
+    public void borrarDatosBoton(View view){
+        DDBBS.borradoDatos(comando);
+    }
+
 
 }
