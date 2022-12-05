@@ -35,4 +35,8 @@ public class Modificar extends AppCompatActivity {
     public void modificarDatos(View view){
         DDBBM.insert(creacionDeCadenasUpdate());
     }
+
+    public void volver (View view){
+        onBackPressed();
+    }
 }

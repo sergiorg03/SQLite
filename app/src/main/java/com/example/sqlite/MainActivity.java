@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 
+import java.sql.SQLException;
+
 public class MainActivity extends AppCompatActivity {
 
     public static SQLiteDatabase db;
@@ -17,7 +19,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+        try {
+            DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         db = DDBBM.getWritableDatabase();
     }
 
