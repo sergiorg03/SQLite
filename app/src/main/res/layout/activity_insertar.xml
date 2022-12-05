@@ -7,7 +7,7 @@
     tools:context=".Insertar">
 
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/Apellido"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id" />
+        app:layout_constraintTop_toBottomOf="@+id/Apellido" />
 
     <EditText
         android:id="@+id/Errores"
@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginBottom="49dp"
+        android:onClick="volver"
         android:text="Volver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -65,12 +66,12 @@
         android:layout_marginTop="89dp"
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="51dp"
+        android:onClick="insertarDatos"
         android:text="Insertar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/BotonVolverInsert"
-        app:layout_constraintTop_toBottomOf="@+id/Errores"
-        android:onClick="insertarDatos"/>
+        app:layout_constraintTop_toBottomOf="@+id/Errores" />
 
     <TextView
         android:id="@+id/textView3"

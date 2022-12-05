@@ -20,6 +20,7 @@ public class Modificar extends AppCompatActivity {
     TextView numeroEmpleadoModif;
     TextView apellidoEmpleadoModif;
     TextView salarioEmpleadoModif;
+    TextView error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class Modificar extends AppCompatActivity {
         numeroEmpleadoModif = findViewById(R.id.emp_no_modif);
         apellidoEmpleadoModif = findViewById(R.id.ModApellido);
         salarioEmpleadoModif = findViewById(R.id.ModSal);
+        error = findViewById(R.id.errores1);
     }
 
 
@@ -49,10 +51,10 @@ public class Modificar extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }else{
-                Toast.makeText(this, "El empleado introducido no existe. ", Toast.LENGTH_LONG);
+                error.setText("El empleado introducido no existe. ");
             }
         }else{
-            Toast.makeText(this, "Introduzca el numero de empleado correcto. ", Toast.LENGTH_LONG);
+            error.setText("Introduzca el numero de empleado correcto. ");
         }
     }
 
