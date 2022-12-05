@@ -2,6 +2,7 @@ package com.example.sqlite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -43,6 +44,10 @@ public class Modificar extends AppCompatActivity {
         if (isNumeric(String.valueOf(numeroEmpleadoModif))){
             if (DDBBM.comprobacionExistencia(numeroEmpleadoModificar)){
                 DDBBM.insert(datoAModif(datoRellenado()));
+                //Cambiamos de clase
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                finish();
             }else{
                 Toast.makeText(this, "El empleado introducido no existe. ", Toast.LENGTH_LONG);
             }
