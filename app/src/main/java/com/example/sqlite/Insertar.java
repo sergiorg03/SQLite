@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.sql.SQLException;
+
 public class Insertar extends AppCompatActivity {
 
     MainActivity MA;
@@ -16,7 +18,11 @@ public class Insertar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertar);
         MA = new MainActivity();
-        DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+        try {
+            DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         sql = "";
     }
 
