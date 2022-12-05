@@ -3,6 +3,7 @@ package com.example.sqlite;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class Insertar extends AppCompatActivity {
 
@@ -19,12 +20,16 @@ public class Insertar extends AppCompatActivity {
         sql = "";
     }
 
+    /**
+     *
+     * @return {String} --
+     */
     private String creacionDeCadenasInsert(){
         sql = "INSERT INTO "+" VALUES ("+");";
         return sql;
     }
 
-    public void insertarDatos(){
+    public void insertarDatos(View view){
         DDBBM.insert(creacionDeCadenasInsert());
     }
 }

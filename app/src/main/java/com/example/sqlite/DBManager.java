@@ -6,6 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class DBManager extends SQLiteOpenHelper {
 
     public SQLiteDatabase db;
@@ -23,7 +29,7 @@ public class DBManager extends SQLiteOpenHelper {
      *
      * Este método se deja por defecto.
      */
-    public DBManager(@Nullable Context context, @Nullable String name, @Nullable int version) {
+    public DBManager(@Nullable Context context, @Nullable String name, @Nullable int version) throws SQLException {
         super(context, name, null, version);
     }
 
@@ -65,6 +71,26 @@ public class DBManager extends SQLiteOpenHelper {
         if (db != null) {
             // Hacer las operaciones que queramos sobre la base de datos
             db.execSQL(comando); // Introduccion de datos en la BBDD
+        }
+    }
+
+    String cadcon = "jdbc:mysql://localhost/";
+    String bd = "Empleados";
+    String user = "root";
+    String password = "MANAGER";
+
+    Connection conexion = DriverManager.getConnection(cadcon+bd, user, password); //Creamos la conexion con la base de datos
+
+    Statement sentencia = conexion.createStatement();
+    ResultSet resultado;
+
+    public boolean comprobacionExistencia(int emp_no) throws SQLException {
+
+        resultado = sentencia.executeQuery("SELECT emp_no FROM Empleados WHERE emp_no = "+emp_no+";");
+        if (resultado.next()){
+            return true;
+        }else{
+            return false;
         }
     }
 }

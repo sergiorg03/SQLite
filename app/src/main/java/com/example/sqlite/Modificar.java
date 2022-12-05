@@ -3,6 +3,7 @@ package com.example.sqlite;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class Modificar extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class Modificar extends AppCompatActivity {
         return sql;
     }
 
-    public void modificarDatos(){
+    public void modificarDatos(View view){
         DDBBM.insert(creacionDeCadenasUpdate());
     }
 }
