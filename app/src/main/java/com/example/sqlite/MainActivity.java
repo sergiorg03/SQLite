@@ -34,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void modificarDatosBoton(View view){
-        DDBBM.modificarDatos(comando);
+        Intent i = new Intent(this, Modificar.class);
+        startActivity(i);
+        finish();
     }
 
     public void borrarDatosBoton(View view){
-        DDBBM.borradoDatos(comando);
+        Intent i = new Intent(this, Borrar.class);
+        startActivity(i);
+        finish();
     }
 
 
