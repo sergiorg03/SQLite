@@ -10,7 +10,10 @@ public class DBManager extends SQLiteOpenHelper {
 
     public SQLiteDatabase db;
 
-    private static final String createTable = "CREATE TABLE comments(_id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, comment TEXT)";
+    /**
+     * Creacion de la base de datos junto a sus campos.
+     */
+    private static final String createTableEmple = "CREATE TABLE Empleados(emp_no INTEGER PRIMARY KEY AUTOINCREMENT, apellido text, salario double)";
 
     /**
      *
@@ -20,7 +23,6 @@ public class DBManager extends SQLiteOpenHelper {
      *
      * Este método se deja por defecto.
      */
-
     public DBManager(@Nullable Context context, @Nullable String name, @Nullable int version) {
         super(context, name, null, version);
     }
@@ -28,7 +30,10 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //En el método onCreate creamos las tablas de la BBDD
-        sqLiteDatabase.execSQL(createTable);
+        if (db == null){
+            sqLiteDatabase.execSQL(createTableEmple);
+        }
+
     }
 
     @Override
