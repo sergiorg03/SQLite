@@ -57,16 +57,29 @@ public class Borrar extends AppCompatActivity {
         return confirmado;
     }
 
+    /**
+     *
+     * @param cadena
+     * @return {boolean}
+     * Devuelve true o false en caso de que el dato introducido a traves de una cadena sea Int o no
+     */
     private static boolean isNumeric(String cadena){
+        boolean num = false;
         try {
-
             numeroEmpleadoABorrar = Integer.parseInt(cadena);
-            return true;
+            num = true;
         } catch (NumberFormatException nfe){
-            return false;
+            num = false;
         }
+        return num;
     }
 
+    /**
+     *
+     * @param view
+     * @throws SQLException
+     * Confirma que todo este correcto antes de borrar el dato definitivamente
+     */
     public void confirmarBorrado(View view) throws SQLException {
         if (comprobaciones()){
             DDBBM.borradoDatos(creacionDeCadenasDelete());
@@ -76,7 +89,5 @@ public class Borrar extends AppCompatActivity {
         }
     }
 
-    public void volver (View view){
-        onBackPressed();
-    }
+    public void volver (View view){ onBackPressed(); }
 }
