@@ -10,13 +10,12 @@ import android.view.View;
 import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
-
     public static SQLiteDatabase db;
     public static DBManager DDBBM;
     public String comando;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
@@ -44,6 +43,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-
-
 }

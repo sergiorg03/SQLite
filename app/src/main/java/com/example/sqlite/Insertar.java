@@ -19,6 +19,10 @@ public class Insertar extends AppCompatActivity {
     TextView salarios;
     TextView error;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +41,18 @@ public class Insertar extends AppCompatActivity {
 
     /**
      *
-     * @return {String} --
+     * @return {String} -- Sentencia SQL
      */
     private String creacionDeCadenasInsert(){
         sql = "INSERT INTO Empleados VALUES ("+apellidos+", "+ salarioEmpleado+");";
         return sql;
     }
 
+    /**
+     *
+     * @param view
+     * Realiza el insert
+     */
     public void insertarDatos(View view){
         if (isNumeric(String.valueOf(salarios))) {
             DDBBM.insert(creacionDeCadenasInsert());
@@ -52,18 +61,23 @@ public class Insertar extends AppCompatActivity {
         }
     }
 
-    public void volver (View view){
-        onBackPressed();
-    }
-
+    /**
+     *
+     * @param cadena
+     * @return {boolean}
+     * Devuelve true o false en caso de que el dato introducido a traves de una cadena sea Int o no
+     */
     private static boolean isNumeric(String cadena){
+        boolean num = false;
         try {
-
             Integer.parseInt(cadena);
             salarioEmpleado = Double.parseDouble(cadena);
-            return true;
+            num = true;
         } catch (NumberFormatException nfe){
-            return false;
+            num = false;
         }
+        return num;
     }
+
+    public void volver (View view){ onBackPressed(); }
 }

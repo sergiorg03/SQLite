@@ -17,6 +17,7 @@ public class Modificar extends AppCompatActivity {
     private String sql;
     private static int numeroEmpleadoModificar;
 
+    // TextViews
     TextView numeroEmpleadoModif;
     TextView apellidoEmpleadoModif;
     TextView salarioEmpleadoModif;
@@ -39,10 +40,13 @@ public class Modificar extends AppCompatActivity {
         error = findViewById(R.id.errores1);
     }
 
-
-
+    /**
+     *
+     * @param view
+     * @throws SQLException
+     * Modificacion  de los datos
+     */
     public void modificarDatos(View view) throws SQLException {
-
         if (isNumeric(String.valueOf(numeroEmpleadoModif))){
             if (DDBBM.comprobacionExistencia(numeroEmpleadoModificar)){
                 DDBBM.insert(datoAModif(datoRellenado()));
@@ -64,27 +68,36 @@ public class Modificar extends AppCompatActivity {
      * @return {boolean} -- Devuelve true si la cadena es un numero, false si es una cadena.
      */
     private static boolean isNumeric(String cadena){
+        boolean num = false;
         try {
-
             numeroEmpleadoModificar = Integer.parseInt(cadena);
-            return true;
+            num = true;
         } catch (NumberFormatException nfe){
-            return false;
+            num = false;
         }
+        return num;
     }
 
-    public void volver (View view){
-        onBackPressed();
-    }
-
+    /**
+     *
+     * @return
+     * Comprueba si los datos estan rellenos
+     */
     public int datoRellenado(){
+        int num;
         if (apellidoEmpleadoModif == null){
-            return 1;
-        }else return 2;
+            num = 1;
+        }else num = 2;
+        return num;
     }
 
+    /**
+     *
+     * @param opcion
+     * @return {String}
+     * Realiza el update
+     */
     public String datoAModif(int opcion){
-
         String cadena = null;
         switch (opcion) {
             case 1:
@@ -95,5 +108,9 @@ public class Modificar extends AppCompatActivity {
                 break;
         }
         return cadena;
+    }
+
+    public void volver (View view){
+        onBackPressed();
     }
 }

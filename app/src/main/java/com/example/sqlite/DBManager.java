@@ -26,20 +26,22 @@ public class DBManager extends SQLiteOpenHelper {
      * @param context {Context} -- Clase desde la que se le llama
      * @param name {String} -- Nombre de la BBDD
      * @param version {int} -- Version de la Base de datos
-     *
      * Este método se deja por defecto.
      */
     public DBManager(@Nullable Context context, @Nullable String name, @Nullable int version) throws SQLException {
         super(context, name, null, version);
     }
 
+    /**
+     *
+     * @param sqLiteDatabase -{SQLiteDatabase} -- Se crea las tablas de la BBDD
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //En el método onCreate creamos las tablas de la BBDD
+        // Creamos las tablas de la BBDD en caso de estar vacía
         if (db == null){
             sqLiteDatabase.execSQL(createTableEmple);
         }
-
     }
 
     @Override
@@ -74,18 +76,23 @@ public class DBManager extends SQLiteOpenHelper {
         }
     }
 
+    // Variables para la SELECT
     String cadcon = "jdbc:mysql://localhost/";
     String bd = "Empleados";
     String user = "root";
     String password = "MANAGER";
-
     Connection conexion = DriverManager.getConnection(cadcon+bd, user, password); //Creamos la conexion con la base de datos
-
     Statement sentencia = conexion.createStatement();
     ResultSet resultado;
 
+    /**
+     *
+     * @param emp_no
+     * @return
+     * @throws SQLException
+     * Comprueba la existencia de un dato en concreto en la tabla
+     */
     public boolean comprobacionExistencia(int emp_no) throws SQLException {
-
         resultado = sentencia.executeQuery("SELECT emp_no FROM Empleados WHERE emp_no = "+emp_no+";");
         if (resultado.next()){
             return true;
