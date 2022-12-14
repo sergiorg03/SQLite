@@ -38,7 +38,7 @@ public class Borrar extends AppCompatActivity {
     }
 
     private String creacionDeCadenasDelete() {
-        sql = "DELETE FROM Empleados WHERE emp_no = " + this.numeroEmpleadoABorrar + ";";
+        sql = "DELETE FROM Empleados WHERE emp_no = (?);";
         return sql;
     }
 
@@ -82,7 +82,7 @@ public class Borrar extends AppCompatActivity {
      */
     public void confirmarBorrado(View view) throws SQLException {
         if (comprobaciones()){
-            DDBBM.borradoDatos(creacionDeCadenasDelete());
+            DDBBM.borradoDatos(creacionDeCadenasDelete(), this.numeroEmpleadoABorrar);
             Intent i = new Intent (this, MainActivity.class);
             startActivity(i);
             finish();

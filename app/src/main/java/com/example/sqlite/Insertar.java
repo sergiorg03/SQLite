@@ -44,7 +44,7 @@ public class Insertar extends AppCompatActivity {
      * @return {String} -- Sentencia SQL
      */
     private String creacionDeCadenasInsert(){
-        sql = "INSERT INTO Empleados VALUES ("+apellidos+", "+ salarioEmpleado+");";
+        sql = "INSERT INTO Empleados VALUES (?,?);";
         return sql;
     }
 
@@ -55,7 +55,7 @@ public class Insertar extends AppCompatActivity {
      */
     public void insertarDatos(View view){
         if (isNumeric(String.valueOf(salarios))) {
-            DDBBM.insert(creacionDeCadenasInsert());
+            DDBBM.insert(creacionDeCadenasInsert(), apellidos.toString(), salarioEmpleado);
         }else{
             error.setText("El salario introducido no es correcto. Por favor introduzca un salario correcto.");
         }
@@ -70,7 +70,7 @@ public class Insertar extends AppCompatActivity {
     private static boolean isNumeric(String cadena){
         boolean num = false;
         try {
-            Integer.parseInt(cadena);
+            Double.parseDouble(cadena);
             salarioEmpleado = Double.parseDouble(cadena);
             num = true;
         } catch (NumberFormatException nfe){
