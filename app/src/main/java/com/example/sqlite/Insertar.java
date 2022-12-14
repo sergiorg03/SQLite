@@ -29,7 +29,7 @@ public class Insertar extends AppCompatActivity {
         setContentView(R.layout.activity_insertar);
         MA = new MainActivity();
         try {
-            DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+            DDBBM = new DBManager(this, "DBSqlite", 1/*Version de la BBDD*/);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class Insertar extends AppCompatActivity {
      * @return {String} -- Sentencia SQL
      */
     private String creacionDeCadenasInsert(){
-        sql = "INSERT INTO Empleados VALUES ("+apellidos+", "+ salarioEmpleado+");";
+        sql = "INSERT INTO Empleados VALUES (?,?);";
         return sql;
     }
 
@@ -55,7 +55,7 @@ public class Insertar extends AppCompatActivity {
      */
     public void insertarDatos(View view){
         if (isNumeric(String.valueOf(salarios))) {
-            DDBBM.insert(creacionDeCadenasInsert());
+            DDBBM.insert(creacionDeCadenasInsert(), apellidos.toString(), salarioEmpleado);
         }else{
             error.setText("El salario introducido no es correcto. Por favor introduzca un salario correcto.");
         }
@@ -68,9 +68,10 @@ public class Insertar extends AppCompatActivity {
      * Devuelve true o false en caso de que el dato introducido a traves de una cadena sea Int o no
      */
     private static boolean isNumeric(String cadena){
-        boolean num = false;
+        boolean num;
         try {
             Integer.parseInt(cadena);
+            Double.parseDouble(cadena);
             salarioEmpleado = Double.parseDouble(cadena);
             num = true;
         } catch (NumberFormatException nfe){

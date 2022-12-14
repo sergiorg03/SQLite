@@ -15,7 +15,7 @@ public class Borrar extends AppCompatActivity {
     MainActivity MA;
     public static DBManager DDBBM;
     private String sql;
-    private int emp_noVal;
+    private int numero;
     TextView id;
     TextView error3; // Textview para mostrar los errores que ocurran
     String cadena;
@@ -27,7 +27,7 @@ public class Borrar extends AppCompatActivity {
         setContentView(R.layout.activity_borrar);
         MA = new MainActivity();
         try {
-            DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+            DDBBM = new DBManager(this, "DBSqlite", 1/*Version de la BBDD*/);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class Borrar extends AppCompatActivity {
     }
 
     private String creacionDeCadenasDelete() {
-        sql = "DELETE FROM Empleados WHERE emp_no = " + this.numeroEmpleadoABorrar + ";";
+        sql = "DELETE FROM Empleados WHERE emp_no = (?);";
         return sql;
     }
 
@@ -82,7 +82,7 @@ public class Borrar extends AppCompatActivity {
      */
     public void confirmarBorrado(View view) throws SQLException {
         if (comprobaciones()){
-            DDBBM.borradoDatos(creacionDeCadenasDelete());
+            DDBBM.borradoDatos(creacionDeCadenasDelete(), this.numeroEmpleadoABorrar);
             Intent i = new Intent (this, MainActivity.class);
             startActivity(i);
             finish();

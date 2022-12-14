@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-            DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+            DDBBM = new DBManager(this, "DBSqlite", 1/*Version de la BBDD*/);
         } catch (SQLException e) {
             e.printStackTrace();
         }

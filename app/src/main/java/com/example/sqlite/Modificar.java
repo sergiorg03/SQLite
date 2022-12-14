@@ -17,6 +17,8 @@ public class Modificar extends AppCompatActivity {
     private String sql;
     private static int numeroEmpleadoModificar;
 
+    int opcion;
+
     // TextViews
     TextView numeroEmpleadoModif;
     TextView apellidoEmpleadoModif;
@@ -29,7 +31,7 @@ public class Modificar extends AppCompatActivity {
         setContentView(R.layout.activity_modificar);
         MA = new MainActivity();
         try {
-            DDBBM = new DBManager(this, "NombreDB_Prueba", 1/*Version de la BBDD*/);
+            DDBBM = new DBManager(this, "DBSqlite", 1/*Version de la BBDD*/);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,7 +51,8 @@ public class Modificar extends AppCompatActivity {
     public void modificarDatos(View view) throws SQLException {
         if (isNumeric(String.valueOf(numeroEmpleadoModif))){
             if (DDBBM.comprobacionExistencia(numeroEmpleadoModificar)){
-                DDBBM.insert(datoAModif(datoRellenado()));
+                DDBBM.modificarDatos(datoAModif(datoRellenado()), this.numeroEmpleadoModificar, Double.parseDouble(String.valueOf(this.salarioEmpleadoModif)),
+                                                this.apellidoEmpleadoModif.toString(), opcion);
                 //Cambiamos de clase
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
@@ -101,7 +104,7 @@ public class Modificar extends AppCompatActivity {
         String cadena = null;
         switch (opcion) {
             case 1:
-                cadena = "UPDATE Empleados SET apellido = "+ this.apellidoEmpleadoModif +" WHERE emp_no = "+ this.numeroEmpleadoModificar +";";
+                cadena = "UPDATE Empleados SET apellido = (?) WHERE emp_no = (?);";
                 break;
             case 2:
                 cadena = "UPDATE Empleados SET salario = "+ this.salarioEmpleadoModif +" WHERE emp_no = "+ this.numeroEmpleadoModificar +";";
